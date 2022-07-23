@@ -196,22 +196,34 @@ translations = {
   'heiß': 'hot',
 }
 
-def generate_strong_declansion_nominativ(nouns, adjectives, ending):
+def generate_strong_declansion(nouns, adjectives, ending, to_be_ge, to_be_en):
   result = []
   for noun in nouns:
     for adjective in adjectives:
-      german = f'{adjective}{ending} {noun}'
-      english = f'{translations[adjective]} {translations[noun]}'
+      german = f'{to_be_ge} {adjective}{ending} {noun}'
+      english = f'{to_be_en} {translations[adjective]} {translations[noun]}'
       result.append(f'{german}: \t{english}')
   return result
 
 
 def main(args):
   result = []
-  # Strong declansion, nominativ
-  result += generate_strong_declansion_nominativ(nouns_male, adjectives, 'er')
-  result += generate_strong_declansion_nominativ(nouns_neuter, adjectives, 'es')
-  result += generate_strong_declansion_nominativ(nouns_female, adjectives, 'e')
+
+  result += generate_strong_declansion(nouns_male, adjectives, 'er', 'es gibt', 'there is')
+  result += generate_strong_declansion(nouns_neuter, adjectives, 'es', 'es gibt', 'there is')
+  result += generate_strong_declansion(nouns_female, adjectives, 'e', 'es gibt', 'there is')
+  result += generate_strong_declansion(nouns_plural, adjectives, 'e', 'es gibt', 'there are')
+
+  result += generate_strong_declansion(nouns_male, adjectives, 'en', 'ich sehe', 'I see')
+  result += generate_strong_declansion(nouns_neuter, adjectives, 'es', 'ich sehe', 'I see')
+  result += generate_strong_declansion(nouns_female, adjectives, 'e', 'ich sehe', 'I see')
+  result += generate_strong_declansion(nouns_plural, adjectives, 'e', 'ich sehe', 'I see')
+
+  result += generate_strong_declansion(nouns_male, adjectives, 'em', 'ich bin mit', 'I\'m with')
+  result += generate_strong_declansion(nouns_neuter, adjectives, 'em', 'ich bin mit', 'I\'m with')
+  result += generate_strong_declansion(nouns_female, adjectives, 'er', 'ich bin mit', 'I\'m with')
+  result += generate_strong_declansion(nouns_plural, adjectives, 'en', 'ich bin mit', 'I\'m with')
+
 
   for entry in result:
     print(entry)
