@@ -196,33 +196,55 @@ translations = {
   'heiß': 'hot',
 }
 
-def generate_strong_declansion(nouns, adjectives, ending, to_be_ge, to_be_en):
+def generate_declansion(nouns, adjectives, ending, sentence_start_ge, sentence_start_en, add_n_to_noun=False):
   result = []
   for noun in nouns:
+    # if add_n_to_noun and noun[-1] != 'n':
+    #   noun += 'n'
+    #   print(noun)
+    #   exit()
     for adjective in adjectives:
-      german = f'{to_be_ge} {adjective}{ending} {noun}'
-      english = f'{to_be_en} {translations[adjective]} {translations[noun]}'
+      german = f'{sentence_start_ge} {adjective}{ending} {noun}'
+      english = f'{sentence_start_en} {translations[adjective]} {translations[noun]}'
       result.append(f'{german}: \t{english}')
   return result
-
 
 def main(args):
   result = []
 
-  result += generate_strong_declansion(nouns_male, adjectives, 'er', 'es gibt', 'there is')
-  result += generate_strong_declansion(nouns_neuter, adjectives, 'es', 'es gibt', 'there is')
-  result += generate_strong_declansion(nouns_female, adjectives, 'e', 'es gibt', 'there is')
-  result += generate_strong_declansion(nouns_plural, adjectives, 'e', 'es gibt', 'there are')
+  # Strong declansion
+  # Nominativ
+  result += generate_declansion(nouns_male, adjectives, 'er', 'es gibt', 'there is')
+  result += generate_declansion(nouns_neuter, adjectives, 'es', 'es gibt', 'there is')
+  result += generate_declansion(nouns_female, adjectives, 'e', 'es gibt', 'there is')
+  result += generate_declansion(nouns_plural, adjectives, 'e', 'es gibt', 'there are')
+  # Akkusativ
+  result += generate_declansion(nouns_male, adjectives, 'en', 'Tieren fressen', 'I see')
+  result += generate_declansion(nouns_neuter, adjectives, 'es', 'Tieren fressen', 'I see')
+  result += generate_declansion(nouns_female, adjectives, 'e', 'Tieren fressen', 'I see')
+  result += generate_declansion(nouns_plural, adjectives, 'e', 'Tieren fressen', 'I see')
+  # Dativ
+  result += generate_declansion(nouns_male, adjectives, 'em', 'ich bin mit', 'I\'m with')
+  result += generate_declansion(nouns_neuter, adjectives, 'em', 'ich bin mit', 'I\'m with')
+  result += generate_declansion(nouns_female, adjectives, 'er', 'ich bin mit', 'I\'m with')
+  result += generate_declansion(nouns_plural, adjectives, 'en', 'ich bin mit', 'I\'m with', add_n_to_noun=True)
 
-  result += generate_strong_declansion(nouns_male, adjectives, 'en', 'ich sehe', 'I see')
-  result += generate_strong_declansion(nouns_neuter, adjectives, 'es', 'ich sehe', 'I see')
-  result += generate_strong_declansion(nouns_female, adjectives, 'e', 'ich sehe', 'I see')
-  result += generate_strong_declansion(nouns_plural, adjectives, 'e', 'ich sehe', 'I see')
-
-  result += generate_strong_declansion(nouns_male, adjectives, 'em', 'ich bin mit', 'I\'m with')
-  result += generate_strong_declansion(nouns_neuter, adjectives, 'em', 'ich bin mit', 'I\'m with')
-  result += generate_strong_declansion(nouns_female, adjectives, 'er', 'ich bin mit', 'I\'m with')
-  result += generate_strong_declansion(nouns_plural, adjectives, 'en', 'ich bin mit', 'I\'m with')
+  # Weak declansion
+  # Nominativ
+  result += generate_declansion(nouns_male, adjectives, 'e', 'da ist der', 'there is the')
+  result += generate_declansion(nouns_neuter, adjectives, 'e', 'da ist das', 'there is the')
+  result += generate_declansion(nouns_female, adjectives, 'e', 'da ist die', 'there is the')
+  result += generate_declansion(nouns_plural, adjectives, 'e', 'da sind die', 'there are the')
+  # Akkusativ
+  result += generate_declansion(nouns_male, adjectives, 'en', 'ich habe den', 'I have the')
+  result += generate_declansion(nouns_neuter, adjectives, 'e', 'ich habe das', 'I have the')
+  result += generate_declansion(nouns_female, adjectives, 'e', 'ich habe die', 'I have the')
+  result += generate_declansion(nouns_plural, adjectives, 'en', 'ich habe die', 'I have the')
+  # Dativ
+  result += generate_declansion(nouns_male, adjectives, 'en', 'ein Leben mit dem', 'a life with')
+  result += generate_declansion(nouns_neuter, adjectives, 'en', 'ein Leben mit das', 'a life with')
+  result += generate_declansion(nouns_female, adjectives, 'en', 'ein Leben mit die', 'a life with')
+  result += generate_declansion(nouns_plural, adjectives, 'en', 'ein Leben mit die', 'a life with', add_n_to_noun=True)
 
 
   for entry in result:
