@@ -233,7 +233,7 @@ def main(args):
   result += generate_declansion(nouns_male, adjectives, 'e', 'da ist der', 'there is the')
   result += generate_declansion(nouns_neuter, adjectives, 'e', 'da ist das', 'there is the')
   result += generate_declansion(nouns_female, adjectives, 'e', 'da ist die', 'there is the')
-  result += generate_declansion(nouns_plural, adjectives, 'e', 'da sind die', 'there are the')
+  result += generate_declansion(nouns_plural, adjectives, 'en', 'da sind die', 'there are the')
   # Akkusativ
   result += generate_declansion(nouns_male, adjectives, 'en', 'ich habe den', 'I have the')
   result += generate_declansion(nouns_neuter, adjectives, 'e', 'ich habe das', 'I have the')
@@ -245,6 +245,22 @@ def main(args):
   result += generate_declansion(nouns_female, adjectives, 'en', 'ein Leben mit die', 'a life with the')
   result += generate_declansion(nouns_plural, adjectives, 'en', 'ein Leben mit die', 'a life with the', add_n_to_noun=True)
 
+  # Mixed declansion
+  # Nominativ
+  result += generate_declansion(nouns_male, adjectives, 'er', 'das ist ein', 'that is a')
+  result += generate_declansion(nouns_neuter, adjectives, 'es', 'das ist ein', 'that is a')
+  result += generate_declansion(nouns_female, adjectives, 'e', 'das ist eine', 'that is a')
+  result += generate_declansion(nouns_plural, adjectives, 'en', 'hier sind keine', 'there are no')
+    # Akkusativ
+  result += generate_declansion(nouns_male, adjectives, 'en', 'ich brauche einen', 'I need a')
+  result += generate_declansion(nouns_neuter, adjectives, 'es', 'ich brauche ein', 'I need a')
+  result += generate_declansion(nouns_female, adjectives, 'e', 'ich brauche eine', 'I need a')
+  result += generate_declansion(nouns_plural, adjectives, 'en', 'ich brauche keine', 'I don\'t need')
+  # Dativ
+  result += generate_declansion(nouns_male, adjectives, 'en', 'ein Leben mit einem', 'a life with a')
+  result += generate_declansion(nouns_neuter, adjectives, 'en', 'ein Leben mit einem', 'a life with a')
+  result += generate_declansion(nouns_female, adjectives, 'en', 'ein Leben mit einer', 'a life with a')
+  result += generate_declansion(nouns_plural, adjectives, 'en', 'ein Leben mit keinen', 'a life without', add_n_to_noun=True)
 
   for entry in result:
     print(entry)
