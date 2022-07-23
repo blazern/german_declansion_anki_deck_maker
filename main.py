@@ -196,28 +196,22 @@ translations = {
   'heiß': 'hot',
 }
 
+def generate_strong_declansion_nominativ(nouns, adjectives, ending):
+  result = []
+  for noun in nouns:
+    for adjective in adjectives:
+      german = f'{adjective}{ending} {noun}'
+      english = f'{translations[adjective]} {translations[noun]}'
+      result.append(f'{german}: \t{english}')
+  return result
+
+
 def main(args):
   result = []
-  # Strong declansion
-  # Nominativ
-  # Male
-  for noun in nouns_male:
-    for adjective in adjectives:
-      german = '{}er {}'.format(adjective, noun)
-      english = '{} {}'.format(translations[adjective], translations[noun])
-      result.append('{}: \t{}'.format(german, english))
-  # Female
-  for noun in nouns_female:
-    for adjective in adjectives:
-      german = '{}e {}'.format(adjective, noun)
-      english = '{} {}'.format(translations[adjective], translations[noun])
-      result.append('{}: \t{}'.format(german, english))
-  # Neuter
-  for noun in nouns_neuter:
-    for adjective in adjectives:
-      german = '{}es {}'.format(adjective, noun)
-      english = '{} {}'.format(translations[adjective], translations[noun])
-      result.append('{}: \t{}'.format(german, english))
+  # Strong declansion, nominativ
+  result += generate_strong_declansion_nominativ(nouns_male, adjectives, 'er')
+  result += generate_strong_declansion_nominativ(nouns_neuter, adjectives, 'es')
+  result += generate_strong_declansion_nominativ(nouns_female, adjectives, 'e')
 
   for entry in result:
     print(entry)
