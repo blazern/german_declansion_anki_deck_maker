@@ -199,12 +199,11 @@ translations = {
 def generate_declansion(nouns, adjectives, ending, sentence_start_ge, sentence_start_en, add_n_to_noun=False):
   result = []
   for noun in nouns:
-    # if add_n_to_noun and noun[-1] != 'n':
-    #   noun += 'n'
-    #   print(noun)
-    #   exit()
+    noun_transformed = noun
+    if add_n_to_noun and noun[-1] != 'n' and noun[-1] != 's':
+      noun_transformed += 'n'
     for adjective in adjectives:
-      german = f'{sentence_start_ge} {adjective}{ending} {noun}'
+      german = f'{sentence_start_ge} {adjective}{ending} {noun_transformed}'
       english = f'{sentence_start_en} {translations[adjective]} {translations[noun]}'
       result.append(f'{german}: \t{english}')
   return result
@@ -241,10 +240,10 @@ def main(args):
   result += generate_declansion(nouns_female, adjectives, 'e', 'ich habe die', 'I have the')
   result += generate_declansion(nouns_plural, adjectives, 'en', 'ich habe die', 'I have the')
   # Dativ
-  result += generate_declansion(nouns_male, adjectives, 'en', 'ein Leben mit dem', 'a life with')
-  result += generate_declansion(nouns_neuter, adjectives, 'en', 'ein Leben mit das', 'a life with')
-  result += generate_declansion(nouns_female, adjectives, 'en', 'ein Leben mit die', 'a life with')
-  result += generate_declansion(nouns_plural, adjectives, 'en', 'ein Leben mit die', 'a life with', add_n_to_noun=True)
+  result += generate_declansion(nouns_male, adjectives, 'en', 'ein Leben mit dem', 'a life with the')
+  result += generate_declansion(nouns_neuter, adjectives, 'en', 'ein Leben mit das', 'a life with the')
+  result += generate_declansion(nouns_female, adjectives, 'en', 'ein Leben mit die', 'a life with the')
+  result += generate_declansion(nouns_plural, adjectives, 'en', 'ein Leben mit die', 'a life with the', add_n_to_noun=True)
 
 
   for entry in result:
