@@ -72,5 +72,16 @@ nounsPlural = {
   'Lieder',
 }
 
+adjectives = {
+  'groß',
+  'klein',
+  'lang',
+  'kurz',
+  'gut',
+  'schlecht',
+  'kalt',
+  'heiß',
+}
+
 if __name__ == '__main__':
   sys.exit(main(sys.argv[1:]))
